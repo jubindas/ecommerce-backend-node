@@ -40,3 +40,21 @@ model BankDetails {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
+model Category {
+  id          String   @id @default(uuid())
+  name        String
+  isActive    Boolean  @default(true)
+  description String?
+  slug        String?  @unique
+  parentId    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  parent   Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  children Category[] @relation("CategoryHierarchy")
+
+  @@index([parentId])
+  @@index([slug])
+  @@index([isActive])
+}

@@ -52,7 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  BankDetails: 'BankDetails'
+  BankDetails: 'BankDetails',
+  Category: 'Category'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -101,6 +102,20 @@ export const BankDetailsScalarFieldEnum = {
 export type BankDetailsScalarFieldEnum = (typeof BankDetailsScalarFieldEnum)[keyof typeof BankDetailsScalarFieldEnum]
 
 
+export const CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  isActive: 'isActive',
+  description: 'description',
+  slug: 'slug',
+  parentId: 'parentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -130,4 +145,23 @@ export const BankDetailsOrderByRelevanceFieldEnum = {
 } as const
 
 export type BankDetailsOrderByRelevanceFieldEnum = (typeof BankDetailsOrderByRelevanceFieldEnum)[keyof typeof BankDetailsOrderByRelevanceFieldEnum]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const CategoryOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  slug: 'slug',
+  parentId: 'parentId'
+} as const
+
+export type CategoryOrderByRelevanceFieldEnum = (typeof CategoryOrderByRelevanceFieldEnum)[keyof typeof CategoryOrderByRelevanceFieldEnum]
 

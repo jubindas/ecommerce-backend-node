@@ -47,3 +47,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type BankDetails = Prisma.BankDetailsModel
+/**
+ * Model Category
+ * 
+ */
+export type Category = Prisma.CategoryModel

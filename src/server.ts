@@ -10,6 +10,8 @@ import userRoutes from "./routes/userRoutes";
 
 import adminRoutes from "./routes/adminRoutes";
 
+import categoryRoutes from "./routes/categoryRoutes";
+
 const app = express();
 
 app.use(
@@ -27,6 +29,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/v1/users", userRoutes);
 
 app.use("/api/v1/admin", adminRoutes);
+
+app.use("/api/v1/categories", categoryRoutes);
 
 app.get("/api/health", (_, res) => {
   res.json({ status: "Server is running" });

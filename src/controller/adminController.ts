@@ -23,6 +23,29 @@ export const registerAdmin = async (
   }
 };
 
+export const login = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      throw new CustomError("Email and password are required", 400);
+    }
+
+    const result = await adminService.loginAdmin({
+      email,
+      password,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Admin login successful",
+      data: result,
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getAllUsers = async (
   req: AuthRequest,
   res: Response

@@ -1,6 +1,13 @@
 import { prisma } from "../db/prisma";
 
+import { comparePassword, generateToken } from "../auth/jwt";
+
 import { CustomError } from "../middleware/errorHandler";
+
+export interface LoginData {
+  email: string;
+  password: string;
+}
 
 export const registerAdmin = async (data: {
   fullName: string;
@@ -24,6 +31,48 @@ export const registerAdmin = async (data: {
   });
 
   return admin;
+};
+
+export const loginAdmin = async (data: LoginData) => {
+  const { email, password } = data;
+
+  const user = await prisma.user.findUnique({
+    where: { email },
+  });
+
+  if (!user) {
+    throw new CustomError("Invalid email or password", 401);
+  }
+
+  if (!user.isAdmin) {
+    throw new CustomError("Access denied. Admin privileges required.", 403);
+  }
+
+  const isPasswordValid = await comparePassword(password, user.password);
+
+  if (!isPasswordValid) {
+    throw new CustomError("Invalid email or password", 401);
+  }
+
+  if (!user.isActive) {
+    throw new CustomError(
+      "Admin account is deactivated. Please contact support.",
+      401
+    );
+  }
+
+  const token = generateToken(user.id, user.id, user.email);
+
+  return {
+    user: {
+      id: user.id,
+      fullName: user.fullName,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      isUserVerified: user.isUserVerified,
+    },
+    token,
+  };
 };
 
 export const getAllUsers = async (page = 1, limit = 10) => {

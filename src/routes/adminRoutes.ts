@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import {
   registerAdmin,
+  login,
   getAllUsers,
   getUserById,
   updateUserStatus,
@@ -20,6 +21,8 @@ import { adminAuthMiddleware } from "../middleware/authorization";
 const router = Router();
 
 router.post("/register", asyncHandler(registerAdmin));
+
+router.post("/login", asyncHandler(login));
 
 router.use(authMiddleware);
 
