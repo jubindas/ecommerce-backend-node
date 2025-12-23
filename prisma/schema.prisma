@@ -51,10 +51,53 @@ model Category {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  parent   Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
-  children Category[] @relation("CategoryHierarchy")
+  parent                 Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  children               Category[] @relation("CategoryHierarchy")
+  masterCategoryProducts Product[]  @relation("MasterCategory")
+  lastCategoryProducts   Product[]  @relation("LastCategory")
 
   @@index([parentId])
   @@index([slug])
   @@index([isActive])
+}
+
+model Product {
+  id                 String    @id @default(uuid())
+  productName        String
+  shortDesc          String?
+  longDesc           String?
+  mainImage          String
+  productImages      String?   @db.LongText
+  youtubeLink        String?
+  size               String?
+  expiryDate         DateTime?
+  buyingPrice        Float
+  maximumRetailPrice Float
+  sellingPrice       Float
+  quantity           Int
+  paymentType        String
+  dimensions         Json?
+  metaData           Json?
+
+  isFeatured      Boolean @default(false)
+  isBestSelling   Boolean @default(false)
+  isNewCollection Boolean @default(false)
+  isRelatedItem   Boolean @default(false)
+  isActive        Boolean @default(true)
+
+  masterCategoryId String
+  lastCategoryId   String?
+
+  masterCategory Category  @relation("MasterCategory", fields: [masterCategoryId], references: [id], onDelete: Cascade)
+  lastCategory   Category? @relation("LastCategory", fields: [lastCategoryId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([masterCategoryId])
+  @@index([lastCategoryId])
+  @@index([isFeatured])
+  @@index([isBestSelling])
+  @@index([isActive])
+  @@index([productName])
 }

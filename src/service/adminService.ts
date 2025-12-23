@@ -14,7 +14,6 @@ export const registerAdmin = async (data: {
   email: string;
   password: string;
 }) => {
-  // Check if email already exists (business logic check)
   const existingUser = await prisma.user.findUnique({
     where: { email: data.email.trim().toLowerCase() },
   });

@@ -20,6 +20,7 @@ import { adminAuthMiddleware } from "../middleware/authorization";
 const router = Router();
 
 router.use(authMiddleware);
+
 router.use(adminAuthMiddleware);
 
 router.post("/", asyncHandler(createCategory));

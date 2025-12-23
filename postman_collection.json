@@ -23,13 +23,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/admin/register",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "register"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "register"]
             }
           },
           "response": []
@@ -50,13 +45,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/admin/login",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "login"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "login"]
             }
           },
           "response": []
@@ -73,13 +63,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/admin/users?page=1&limit=10",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "users"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "users"],
               "query": [
                 {
                   "key": "page",
@@ -106,14 +91,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/admin/users/:userId",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "users",
-                ":userId"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "users", ":userId"],
               "variable": [
                 {
                   "key": "userId",
@@ -145,15 +124,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/admin/users/:userId/status",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "users",
-                ":userId",
-                "status"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "users", ":userId", "status"],
               "variable": [
                 {
                   "key": "userId",
@@ -176,15 +148,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/admin/users/:userId/verify",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "users",
-                ":userId",
-                "verify"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "users", ":userId", "verify"],
               "variable": [
                 {
                   "key": "userId",
@@ -207,14 +172,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/admin/users/:userId",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "users",
-                ":userId"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "users", ":userId"],
               "variable": [
                 {
                   "key": "userId",
@@ -237,13 +196,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/admin/bank-details",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "bank-details"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "bank-details"]
             }
           },
           "response": []
@@ -260,14 +214,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/admin/bank-details/:userId",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "bank-details",
-                ":userId"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "bank-details", ":userId"],
               "variable": [
                 {
                   "key": "userId",
@@ -299,13 +247,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/user/register",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "user",
-                "register"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["user", "register"]
             }
           },
           "response": []
@@ -326,13 +269,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/user/login",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "user",
-                "login"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["user", "login"]
             }
           },
           "response": []
@@ -349,13 +287,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/user/profile",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "user",
-                "profile"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["user", "profile"]
             }
           },
           "response": []
@@ -381,13 +314,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/user/profile",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "user",
-                "profile"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["user", "profile"]
             }
           },
           "response": []
@@ -413,13 +341,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/user/change-password",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "user",
-                "change-password"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["user", "change-password"]
             }
           },
           "response": []
@@ -445,13 +368,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/user/bank-details",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "user",
-                "bank-details"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["user", "bank-details"]
             }
           },
           "response": []
@@ -477,13 +395,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/user/bank-details",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "user",
-                "bank-details"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["user", "bank-details"]
             }
           },
           "response": []
@@ -500,13 +413,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/user/bank-details",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "user",
-                "bank-details"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["user", "bank-details"]
             }
           },
           "response": []
@@ -537,12 +445,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/category",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "category"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["category"]
             }
           },
           "response": []
@@ -559,12 +463,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/category",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "category"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["category"]
             }
           },
           "response": []
@@ -581,13 +481,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/category/roots",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "category",
-                "roots"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["category", "roots"]
             }
           },
           "response": []
@@ -604,13 +499,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/category/:categoryId",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "category",
-                ":categoryId"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["category", ":categoryId"],
               "variable": [
                 {
                   "key": "categoryId",
@@ -633,14 +523,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/category/slug/:slug",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "category",
-                "slug",
-                ":slug"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["category", "slug", ":slug"],
               "variable": [
                 {
                   "key": "slug",
@@ -663,14 +547,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/category/:categoryId/children",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "category",
-                ":categoryId",
-                "children"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["category", ":categoryId", "children"],
               "variable": [
                 {
                   "key": "categoryId",
@@ -702,13 +580,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/category/:categoryId",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "category",
-                ":categoryId"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["category", ":categoryId"],
               "variable": [
                 {
                   "key": "categoryId",
@@ -731,13 +604,548 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/category/:categoryId",
-              "host": [
-                "{{baseUrl}}"
+              "host": ["{{baseUrl}}"],
+              "path": ["category", ":categoryId"],
+              "variable": [
+                {
+                  "key": "categoryId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Products - Admin",
+      "item": [
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "productImages",
+                  "type": "file",
+                  "src": [],
+                  "disabled": false
+                },
+                {
+                  "key": "productImages",
+                  "type": "file",
+                  "src": [],
+                  "disabled": false
+                },
+                {
+                  "key": "productName",
+                  "value": "Premium Laptop",
+                  "type": "text"
+                },
+                {
+                  "key": "shortDesc",
+                  "value": "High-performance laptop for professionals",
+                  "type": "text"
+                },
+                {
+                  "key": "longDesc",
+                  "value": "This is a premium laptop with latest specifications and excellent performance",
+                  "type": "text"
+                },
+                {
+                  "key": "mainImage",
+                  "type": "file",
+                  "src": [],
+                  "disabled": false
+                },
+                {
+                  "key": "youtubeLink",
+                  "value": "https://www.youtube.com/watch?v=example",
+                  "type": "text"
+                },
+                {
+                  "key": "size",
+                  "value": "15.6 inches",
+                  "type": "text"
+                },
+                {
+                  "key": "buyingPrice",
+                  "value": "50000",
+                  "type": "text"
+                },
+                {
+                  "key": "maximumRetailPrice",
+                  "value": "75000",
+                  "type": "text"
+                },
+                {
+                  "key": "sellingPrice",
+                  "value": "65000",
+                  "type": "text"
+                },
+                {
+                  "key": "quantity",
+                  "value": "50",
+                  "type": "text"
+                },
+                {
+                  "key": "paymentType",
+                  "value": "all",
+                  "type": "text"
+                },
+                {
+                  "key": "masterCategoryId",
+                  "value": "{{categoryId}}",
+                  "type": "text"
+                },
+                {
+                  "key": "isFeatured",
+                  "value": "true",
+                  "type": "text"
+                },
+                {
+                  "key": "isBestSelling",
+                  "value": "true",
+                  "type": "text"
+                },
+                {
+                  "key": "isNewCollection",
+                  "value": "false",
+                  "type": "text"
+                },
+                {
+                  "key": "metaData",
+                  "value": "{\"title\": \"Premium Laptop\", \"description\": \"Best laptop\", \"keywords\": [\"laptop\", \"computer\"]}",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/admin/products",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "admin", "products"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "productName",
+                  "value": "Updated Premium Laptop",
+                  "type": "text"
+                },
+                {
+                  "key": "sellingPrice",
+                  "value": "62000",
+                  "type": "text"
+                },
+                {
+                  "key": "quantity",
+                  "value": "45",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/admin/products/:productId",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "admin", "products", ":productId"],
+              "variable": [
+                {
+                  "key": "productId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Product (Soft Delete)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v1/admin/products/:productId",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "admin", "products", ":productId"],
+              "variable": [
+                {
+                  "key": "productId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Product (Hard Delete)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v1/admin/products/:productId/hard",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "admin", "products", ":productId", "hard"],
+              "variable": [
+                {
+                  "key": "productId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Products - User",
+      "item": [
+        {
+          "name": "Get All Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/products?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "products"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Featured Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/products/special/featured?limit=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "products", "special", "featured"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Best Selling Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/products/special/best-selling?limit=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "products", "special", "best-selling"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get New Collection Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/products/special/new-collection?limit=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "products", "special", "new-collection"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/products/search/query?query=laptop&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "products", "search", "query"],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "laptop"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Products by Category",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/products/category/:categoryId?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "products", "category", ":categoryId"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
               ],
-              "path": [
-                "category",
-                ":categoryId"
-              ],
+              "variable": [
+                {
+                  "key": "categoryId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Product",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/products/:productId",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "products", ":productId"],
+              "variable": [
+                {
+                  "key": "productId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Categories - Admin",
+      "item": [
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Electronics\",\n  \"slug\": \"electronics\",\n  \"description\": \"Electronic items and gadgets\",\n  \"isActive\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/categories",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "categories"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Category",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Electronics & Gadgets\",\n  \"description\": \"All electronic items and gadgets updated\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/categories/:categoryId",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "categories", ":categoryId"],
+              "variable": [
+                {
+                  "key": "categoryId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Category",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v1/categories/:categoryId",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "categories", ":categoryId"],
+              "variable": [
+                {
+                  "key": "categoryId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Categories - User",
+      "item": [
+        {
+          "name": "Get All Categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/categories",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "categories"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Root Categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/categories/roots",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "categories", "roots"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Category by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/categories/:categoryId",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "categories", ":categoryId"],
+              "variable": [
+                {
+                  "key": "categoryId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Category by Slug",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/categories/slug/electronics",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "categories", "slug", "electronics"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Category Children",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/categories/:categoryId/children",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "categories", ":categoryId", "children"],
               "variable": [
                 {
                   "key": "categoryId",
@@ -762,6 +1170,14 @@
     },
     {
       "key": "userToken",
+      "value": ""
+    },
+    {
+      "key": "categoryId",
+      "value": ""
+    },
+    {
+      "key": "productId",
       "value": ""
     }
   ]

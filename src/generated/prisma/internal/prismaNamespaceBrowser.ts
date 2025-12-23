@@ -53,7 +53,8 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   BankDetails: 'BankDetails',
-  Category: 'Category'
+  Category: 'Category',
+  Product: 'Product'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -116,12 +117,51 @@ export const CategoryScalarFieldEnum = {
 export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
 
 
+export const ProductScalarFieldEnum = {
+  id: 'id',
+  productName: 'productName',
+  shortDesc: 'shortDesc',
+  longDesc: 'longDesc',
+  mainImage: 'mainImage',
+  productImages: 'productImages',
+  youtubeLink: 'youtubeLink',
+  size: 'size',
+  expiryDate: 'expiryDate',
+  buyingPrice: 'buyingPrice',
+  maximumRetailPrice: 'maximumRetailPrice',
+  sellingPrice: 'sellingPrice',
+  quantity: 'quantity',
+  paymentType: 'paymentType',
+  dimensions: 'dimensions',
+  metaData: 'metaData',
+  isFeatured: 'isFeatured',
+  isBestSelling: 'isBestSelling',
+  isNewCollection: 'isNewCollection',
+  isRelatedItem: 'isRelatedItem',
+  isActive: 'isActive',
+  masterCategoryId: 'masterCategoryId',
+  lastCategoryId: 'lastCategoryId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: 'DbNull',
+  JsonNull: 'JsonNull'
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const UserOrderByRelevanceFieldEnum = {
@@ -164,4 +204,38 @@ export const CategoryOrderByRelevanceFieldEnum = {
 } as const
 
 export type CategoryOrderByRelevanceFieldEnum = (typeof CategoryOrderByRelevanceFieldEnum)[keyof typeof CategoryOrderByRelevanceFieldEnum]
+
+
+export const JsonNullValueFilter = {
+  DbNull: 'DbNull',
+  JsonNull: 'JsonNull',
+  AnyNull: 'AnyNull'
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+export const QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+} as const
+
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const ProductOrderByRelevanceFieldEnum = {
+  id: 'id',
+  productName: 'productName',
+  shortDesc: 'shortDesc',
+  longDesc: 'longDesc',
+  mainImage: 'mainImage',
+  productImages: 'productImages',
+  youtubeLink: 'youtubeLink',
+  size: 'size',
+  paymentType: 'paymentType',
+  masterCategoryId: 'masterCategoryId',
+  lastCategoryId: 'lastCategoryId'
+} as const
+
+export type ProductOrderByRelevanceFieldEnum = (typeof ProductOrderByRelevanceFieldEnum)[keyof typeof ProductOrderByRelevanceFieldEnum]
 
