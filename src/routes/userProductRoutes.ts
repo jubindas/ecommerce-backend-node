@@ -17,36 +17,30 @@ import {
   getProductsQueryValidation,
 } from "../validators/productValidators";
 
-import { asyncHandler } from "../lib/asyncHandler";
-
 const router = Router();
 
-router.get(
-  "/",
-  validate(getProductsQueryValidation),
-  asyncHandler(getAllProducts)
-);
+router.get("/", validate(getProductsQueryValidation), getAllProducts);
 
-router.get("/special/featured", asyncHandler(getFeaturedProducts));
+router.get("/special/featured", getFeaturedProducts);
 
-router.get("/special/best-selling", asyncHandler(getBestSellingProducts));
+router.get("/special/best-selling", getBestSellingProducts);
 
-router.get("/special/new-collection", asyncHandler(getNewCollectionProducts));
+router.get("/special/new-collection", getNewCollectionProducts);
 
-router.get("/search/query", asyncHandler(searchProducts));
+router.get("/search/query", searchProducts);
 
 router.get(
   "/category/:categoryId",
   productIdParamValidation,
   validate(getProductsQueryValidation),
-  asyncHandler(getProductsByCategory)
+  getProductsByCategory
 );
 
 router.get(
   "/:productId",
   productIdParamValidation,
   validate(getProductsQueryValidation),
-  asyncHandler(getProductById)
+  getProductById
 );
 
 export default router;

@@ -40,20 +40,17 @@ export const createProductValidation = [
     .withMessage("Invalid expiry date format"),
 
   body("buyingPrice")
-    .notEmpty()
-    .withMessage("Buying price is required")
+    .optional()
     .isFloat({ min: 0 })
     .withMessage("Buying price must be a positive number"),
 
   body("maximumRetailPrice")
-    .notEmpty()
-    .withMessage("Maximum retail price is required")
+    .optional()
     .isFloat({ min: 0 })
     .withMessage("Maximum retail price must be a positive number"),
 
   body("sellingPrice")
-    .notEmpty()
-    .withMessage("Selling price is required")
+    .optional()
     .isFloat({ min: 0 })
     .withMessage("Selling price must be a positive number"),
 

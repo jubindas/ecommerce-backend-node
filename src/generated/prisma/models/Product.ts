@@ -313,9 +313,9 @@ export type ProductGroupByOutputType = {
   youtubeLink: string | null
   size: string | null
   expiryDate: Date | null
-  buyingPrice: number
-  maximumRetailPrice: number
-  sellingPrice: number
+  buyingPrice: number | null
+  maximumRetailPrice: number | null
+  sellingPrice: number | null
   quantity: number
   paymentType: string
   dimensions: runtime.JsonValue | null
@@ -364,9 +364,9 @@ export type ProductWhereInput = {
   youtubeLink?: Prisma.StringNullableFilter<"Product"> | string | null
   size?: Prisma.StringNullableFilter<"Product"> | string | null
   expiryDate?: Prisma.DateTimeNullableFilter<"Product"> | Date | string | null
-  buyingPrice?: Prisma.FloatFilter<"Product"> | number
-  maximumRetailPrice?: Prisma.FloatFilter<"Product"> | number
-  sellingPrice?: Prisma.FloatFilter<"Product"> | number
+  buyingPrice?: Prisma.FloatNullableFilter<"Product"> | number | null
+  maximumRetailPrice?: Prisma.FloatNullableFilter<"Product"> | number | null
+  sellingPrice?: Prisma.FloatNullableFilter<"Product"> | number | null
   quantity?: Prisma.IntFilter<"Product"> | number
   paymentType?: Prisma.StringFilter<"Product"> | string
   dimensions?: Prisma.JsonNullableFilter<"Product">
@@ -396,9 +396,9 @@ export type ProductOrderByWithRelationInput = {
   youtubeLink?: Prisma.SortOrderInput | Prisma.SortOrder
   size?: Prisma.SortOrderInput | Prisma.SortOrder
   expiryDate?: Prisma.SortOrderInput | Prisma.SortOrder
-  buyingPrice?: Prisma.SortOrder
-  maximumRetailPrice?: Prisma.SortOrder
-  sellingPrice?: Prisma.SortOrder
+  buyingPrice?: Prisma.SortOrderInput | Prisma.SortOrder
+  maximumRetailPrice?: Prisma.SortOrderInput | Prisma.SortOrder
+  sellingPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   quantity?: Prisma.SortOrder
   paymentType?: Prisma.SortOrder
   dimensions?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -432,9 +432,9 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   youtubeLink?: Prisma.StringNullableFilter<"Product"> | string | null
   size?: Prisma.StringNullableFilter<"Product"> | string | null
   expiryDate?: Prisma.DateTimeNullableFilter<"Product"> | Date | string | null
-  buyingPrice?: Prisma.FloatFilter<"Product"> | number
-  maximumRetailPrice?: Prisma.FloatFilter<"Product"> | number
-  sellingPrice?: Prisma.FloatFilter<"Product"> | number
+  buyingPrice?: Prisma.FloatNullableFilter<"Product"> | number | null
+  maximumRetailPrice?: Prisma.FloatNullableFilter<"Product"> | number | null
+  sellingPrice?: Prisma.FloatNullableFilter<"Product"> | number | null
   quantity?: Prisma.IntFilter<"Product"> | number
   paymentType?: Prisma.StringFilter<"Product"> | string
   dimensions?: Prisma.JsonNullableFilter<"Product">
@@ -464,9 +464,9 @@ export type ProductOrderByWithAggregationInput = {
   youtubeLink?: Prisma.SortOrderInput | Prisma.SortOrder
   size?: Prisma.SortOrderInput | Prisma.SortOrder
   expiryDate?: Prisma.SortOrderInput | Prisma.SortOrder
-  buyingPrice?: Prisma.SortOrder
-  maximumRetailPrice?: Prisma.SortOrder
-  sellingPrice?: Prisma.SortOrder
+  buyingPrice?: Prisma.SortOrderInput | Prisma.SortOrder
+  maximumRetailPrice?: Prisma.SortOrderInput | Prisma.SortOrder
+  sellingPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   quantity?: Prisma.SortOrder
   paymentType?: Prisma.SortOrder
   dimensions?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -500,9 +500,9 @@ export type ProductScalarWhereWithAggregatesInput = {
   youtubeLink?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   size?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   expiryDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Product"> | Date | string | null
-  buyingPrice?: Prisma.FloatWithAggregatesFilter<"Product"> | number
-  maximumRetailPrice?: Prisma.FloatWithAggregatesFilter<"Product"> | number
-  sellingPrice?: Prisma.FloatWithAggregatesFilter<"Product"> | number
+  buyingPrice?: Prisma.FloatNullableWithAggregatesFilter<"Product"> | number | null
+  maximumRetailPrice?: Prisma.FloatNullableWithAggregatesFilter<"Product"> | number | null
+  sellingPrice?: Prisma.FloatNullableWithAggregatesFilter<"Product"> | number | null
   quantity?: Prisma.IntWithAggregatesFilter<"Product"> | number
   paymentType?: Prisma.StringWithAggregatesFilter<"Product"> | string
   dimensions?: Prisma.JsonNullableWithAggregatesFilter<"Product">
@@ -528,9 +528,9 @@ export type ProductCreateInput = {
   youtubeLink?: string | null
   size?: string | null
   expiryDate?: Date | string | null
-  buyingPrice: number
-  maximumRetailPrice: number
-  sellingPrice: number
+  buyingPrice?: number | null
+  maximumRetailPrice?: number | null
+  sellingPrice?: number | null
   quantity: number
   paymentType: string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -558,9 +558,9 @@ export type ProductUncheckedCreateInput = {
   youtubeLink?: string | null
   size?: string | null
   expiryDate?: Date | string | null
-  buyingPrice: number
-  maximumRetailPrice: number
-  sellingPrice: number
+  buyingPrice?: number | null
+  maximumRetailPrice?: number | null
+  sellingPrice?: number | null
   quantity: number
   paymentType: string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -588,9 +588,9 @@ export type ProductUpdateInput = {
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  buyingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  maximumRetailPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  sellingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  buyingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  maximumRetailPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   paymentType?: Prisma.StringFieldUpdateOperationsInput | string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -618,9 +618,9 @@ export type ProductUncheckedUpdateInput = {
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  buyingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  maximumRetailPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  sellingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  buyingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  maximumRetailPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   paymentType?: Prisma.StringFieldUpdateOperationsInput | string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -648,9 +648,9 @@ export type ProductCreateManyInput = {
   youtubeLink?: string | null
   size?: string | null
   expiryDate?: Date | string | null
-  buyingPrice: number
-  maximumRetailPrice: number
-  sellingPrice: number
+  buyingPrice?: number | null
+  maximumRetailPrice?: number | null
+  sellingPrice?: number | null
   quantity: number
   paymentType: string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -676,9 +676,9 @@ export type ProductUpdateManyMutationInput = {
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  buyingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  maximumRetailPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  sellingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  buyingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  maximumRetailPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   paymentType?: Prisma.StringFieldUpdateOperationsInput | string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -702,9 +702,9 @@ export type ProductUncheckedUpdateManyInput = {
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  buyingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  maximumRetailPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  sellingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  buyingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  maximumRetailPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   paymentType?: Prisma.StringFieldUpdateOperationsInput | string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -923,8 +923,8 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
 
-export type FloatFieldUpdateOperationsInput = {
-  set?: number
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
   increment?: number
   decrement?: number
   multiply?: number
@@ -977,9 +977,9 @@ export type ProductCreateWithoutMasterCategoryInput = {
   youtubeLink?: string | null
   size?: string | null
   expiryDate?: Date | string | null
-  buyingPrice: number
-  maximumRetailPrice: number
-  sellingPrice: number
+  buyingPrice?: number | null
+  maximumRetailPrice?: number | null
+  sellingPrice?: number | null
   quantity: number
   paymentType: string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1006,9 +1006,9 @@ export type ProductUncheckedCreateWithoutMasterCategoryInput = {
   youtubeLink?: string | null
   size?: string | null
   expiryDate?: Date | string | null
-  buyingPrice: number
-  maximumRetailPrice: number
-  sellingPrice: number
+  buyingPrice?: number | null
+  maximumRetailPrice?: number | null
+  sellingPrice?: number | null
   quantity: number
   paymentType: string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1045,9 +1045,9 @@ export type ProductCreateWithoutLastCategoryInput = {
   youtubeLink?: string | null
   size?: string | null
   expiryDate?: Date | string | null
-  buyingPrice: number
-  maximumRetailPrice: number
-  sellingPrice: number
+  buyingPrice?: number | null
+  maximumRetailPrice?: number | null
+  sellingPrice?: number | null
   quantity: number
   paymentType: string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1074,9 +1074,9 @@ export type ProductUncheckedCreateWithoutLastCategoryInput = {
   youtubeLink?: string | null
   size?: string | null
   expiryDate?: Date | string | null
-  buyingPrice: number
-  maximumRetailPrice: number
-  sellingPrice: number
+  buyingPrice?: number | null
+  maximumRetailPrice?: number | null
+  sellingPrice?: number | null
   quantity: number
   paymentType: string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1132,9 +1132,9 @@ export type ProductScalarWhereInput = {
   youtubeLink?: Prisma.StringNullableFilter<"Product"> | string | null
   size?: Prisma.StringNullableFilter<"Product"> | string | null
   expiryDate?: Prisma.DateTimeNullableFilter<"Product"> | Date | string | null
-  buyingPrice?: Prisma.FloatFilter<"Product"> | number
-  maximumRetailPrice?: Prisma.FloatFilter<"Product"> | number
-  sellingPrice?: Prisma.FloatFilter<"Product"> | number
+  buyingPrice?: Prisma.FloatNullableFilter<"Product"> | number | null
+  maximumRetailPrice?: Prisma.FloatNullableFilter<"Product"> | number | null
+  sellingPrice?: Prisma.FloatNullableFilter<"Product"> | number | null
   quantity?: Prisma.IntFilter<"Product"> | number
   paymentType?: Prisma.StringFilter<"Product"> | string
   dimensions?: Prisma.JsonNullableFilter<"Product">
@@ -1176,9 +1176,9 @@ export type ProductCreateWithoutCartInput = {
   youtubeLink?: string | null
   size?: string | null
   expiryDate?: Date | string | null
-  buyingPrice: number
-  maximumRetailPrice: number
-  sellingPrice: number
+  buyingPrice?: number | null
+  maximumRetailPrice?: number | null
+  sellingPrice?: number | null
   quantity: number
   paymentType: string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1205,9 +1205,9 @@ export type ProductUncheckedCreateWithoutCartInput = {
   youtubeLink?: string | null
   size?: string | null
   expiryDate?: Date | string | null
-  buyingPrice: number
-  maximumRetailPrice: number
-  sellingPrice: number
+  buyingPrice?: number | null
+  maximumRetailPrice?: number | null
+  sellingPrice?: number | null
   quantity: number
   paymentType: string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1250,9 +1250,9 @@ export type ProductUpdateWithoutCartInput = {
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  buyingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  maximumRetailPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  sellingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  buyingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  maximumRetailPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   paymentType?: Prisma.StringFieldUpdateOperationsInput | string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1279,9 +1279,9 @@ export type ProductUncheckedUpdateWithoutCartInput = {
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  buyingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  maximumRetailPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  sellingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  buyingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  maximumRetailPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   paymentType?: Prisma.StringFieldUpdateOperationsInput | string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1308,9 +1308,9 @@ export type ProductCreateWithoutWishlistInput = {
   youtubeLink?: string | null
   size?: string | null
   expiryDate?: Date | string | null
-  buyingPrice: number
-  maximumRetailPrice: number
-  sellingPrice: number
+  buyingPrice?: number | null
+  maximumRetailPrice?: number | null
+  sellingPrice?: number | null
   quantity: number
   paymentType: string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1337,9 +1337,9 @@ export type ProductUncheckedCreateWithoutWishlistInput = {
   youtubeLink?: string | null
   size?: string | null
   expiryDate?: Date | string | null
-  buyingPrice: number
-  maximumRetailPrice: number
-  sellingPrice: number
+  buyingPrice?: number | null
+  maximumRetailPrice?: number | null
+  sellingPrice?: number | null
   quantity: number
   paymentType: string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1382,9 +1382,9 @@ export type ProductUpdateWithoutWishlistInput = {
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  buyingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  maximumRetailPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  sellingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  buyingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  maximumRetailPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   paymentType?: Prisma.StringFieldUpdateOperationsInput | string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1411,9 +1411,9 @@ export type ProductUncheckedUpdateWithoutWishlistInput = {
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  buyingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  maximumRetailPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  sellingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  buyingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  maximumRetailPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   paymentType?: Prisma.StringFieldUpdateOperationsInput | string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1440,9 +1440,9 @@ export type ProductCreateManyMasterCategoryInput = {
   youtubeLink?: string | null
   size?: string | null
   expiryDate?: Date | string | null
-  buyingPrice: number
-  maximumRetailPrice: number
-  sellingPrice: number
+  buyingPrice?: number | null
+  maximumRetailPrice?: number | null
+  sellingPrice?: number | null
   quantity: number
   paymentType: string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1467,9 +1467,9 @@ export type ProductCreateManyLastCategoryInput = {
   youtubeLink?: string | null
   size?: string | null
   expiryDate?: Date | string | null
-  buyingPrice: number
-  maximumRetailPrice: number
-  sellingPrice: number
+  buyingPrice?: number | null
+  maximumRetailPrice?: number | null
+  sellingPrice?: number | null
   quantity: number
   paymentType: string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1494,9 +1494,9 @@ export type ProductUpdateWithoutMasterCategoryInput = {
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  buyingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  maximumRetailPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  sellingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  buyingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  maximumRetailPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   paymentType?: Prisma.StringFieldUpdateOperationsInput | string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1523,9 +1523,9 @@ export type ProductUncheckedUpdateWithoutMasterCategoryInput = {
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  buyingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  maximumRetailPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  sellingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  buyingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  maximumRetailPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   paymentType?: Prisma.StringFieldUpdateOperationsInput | string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1552,9 +1552,9 @@ export type ProductUncheckedUpdateManyWithoutMasterCategoryInput = {
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  buyingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  maximumRetailPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  sellingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  buyingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  maximumRetailPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   paymentType?: Prisma.StringFieldUpdateOperationsInput | string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1579,9 +1579,9 @@ export type ProductUpdateWithoutLastCategoryInput = {
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  buyingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  maximumRetailPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  sellingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  buyingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  maximumRetailPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   paymentType?: Prisma.StringFieldUpdateOperationsInput | string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1608,9 +1608,9 @@ export type ProductUncheckedUpdateWithoutLastCategoryInput = {
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  buyingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  maximumRetailPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  sellingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  buyingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  maximumRetailPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   paymentType?: Prisma.StringFieldUpdateOperationsInput | string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1637,9 +1637,9 @@ export type ProductUncheckedUpdateManyWithoutLastCategoryInput = {
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  buyingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  maximumRetailPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  sellingPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  buyingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  maximumRetailPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   paymentType?: Prisma.StringFieldUpdateOperationsInput | string
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1784,9 +1784,9 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     youtubeLink: string | null
     size: string | null
     expiryDate: Date | null
-    buyingPrice: number
-    maximumRetailPrice: number
-    sellingPrice: number
+    buyingPrice: number | null
+    maximumRetailPrice: number | null
+    sellingPrice: number | null
     quantity: number
     paymentType: string
     dimensions: runtime.JsonValue | null

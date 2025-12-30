@@ -389,7 +389,9 @@ export const ModelName = {
   Category: 'Category',
   Product: 'Product',
   Cart: 'Cart',
-  Wishlist: 'Wishlist'
+  Address: 'Address',
+  Wishlist: 'Wishlist',
+  ColorScheme: 'ColorScheme'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -405,7 +407,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "bankDetails" | "category" | "product" | "cart" | "wishlist"
+    modelProps: "user" | "bankDetails" | "category" | "product" | "cart" | "address" | "wishlist" | "colorScheme"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -739,6 +741,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Address: {
+      payload: Prisma.$AddressPayload<ExtArgs>
+      fields: Prisma.AddressFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AddressFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AddressPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AddressFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AddressPayload>
+        }
+        findFirst: {
+          args: Prisma.AddressFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AddressPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AddressFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AddressPayload>
+        }
+        findMany: {
+          args: Prisma.AddressFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AddressPayload>[]
+        }
+        create: {
+          args: Prisma.AddressCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AddressPayload>
+        }
+        createMany: {
+          args: Prisma.AddressCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.AddressDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AddressPayload>
+        }
+        update: {
+          args: Prisma.AddressUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AddressPayload>
+        }
+        deleteMany: {
+          args: Prisma.AddressDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AddressUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.AddressUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AddressPayload>
+        }
+        aggregate: {
+          args: Prisma.AddressAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAddress>
+        }
+        groupBy: {
+          args: Prisma.AddressGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AddressGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AddressCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AddressCountAggregateOutputType> | number
+        }
+      }
+    }
     Wishlist: {
       payload: Prisma.$WishlistPayload<ExtArgs>
       fields: Prisma.WishlistFieldRefs
@@ -802,6 +870,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.WishlistCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.WishlistCountAggregateOutputType> | number
+        }
+      }
+    }
+    ColorScheme: {
+      payload: Prisma.$ColorSchemePayload<ExtArgs>
+      fields: Prisma.ColorSchemeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ColorSchemeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ColorSchemePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ColorSchemeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ColorSchemePayload>
+        }
+        findFirst: {
+          args: Prisma.ColorSchemeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ColorSchemePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ColorSchemeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ColorSchemePayload>
+        }
+        findMany: {
+          args: Prisma.ColorSchemeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ColorSchemePayload>[]
+        }
+        create: {
+          args: Prisma.ColorSchemeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ColorSchemePayload>
+        }
+        createMany: {
+          args: Prisma.ColorSchemeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.ColorSchemeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ColorSchemePayload>
+        }
+        update: {
+          args: Prisma.ColorSchemeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ColorSchemePayload>
+        }
+        deleteMany: {
+          args: Prisma.ColorSchemeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ColorSchemeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.ColorSchemeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ColorSchemePayload>
+        }
+        aggregate: {
+          args: Prisma.ColorSchemeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateColorScheme>
+        }
+        groupBy: {
+          args: Prisma.ColorSchemeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ColorSchemeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ColorSchemeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ColorSchemeCountAggregateOutputType> | number
         }
       }
     }
@@ -931,6 +1065,14 @@ export const CartScalarFieldEnum = {
 export type CartScalarFieldEnum = (typeof CartScalarFieldEnum)[keyof typeof CartScalarFieldEnum]
 
 
+export const AddressScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId'
+} as const
+
+export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeof AddressScalarFieldEnum]
+
+
 export const WishlistScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -939,6 +1081,16 @@ export const WishlistScalarFieldEnum = {
 } as const
 
 export type WishlistScalarFieldEnum = (typeof WishlistScalarFieldEnum)[keyof typeof WishlistScalarFieldEnum]
+
+
+export const ColorSchemeScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt'
+} as const
+
+export type ColorSchemeScalarFieldEnum = (typeof ColorSchemeScalarFieldEnum)[keyof typeof ColorSchemeScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1042,6 +1194,14 @@ export const CartOrderByRelevanceFieldEnum = {
 export type CartOrderByRelevanceFieldEnum = (typeof CartOrderByRelevanceFieldEnum)[keyof typeof CartOrderByRelevanceFieldEnum]
 
 
+export const AddressOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId'
+} as const
+
+export type AddressOrderByRelevanceFieldEnum = (typeof AddressOrderByRelevanceFieldEnum)[keyof typeof AddressOrderByRelevanceFieldEnum]
+
+
 export const WishlistOrderByRelevanceFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -1049,6 +1209,15 @@ export const WishlistOrderByRelevanceFieldEnum = {
 } as const
 
 export type WishlistOrderByRelevanceFieldEnum = (typeof WishlistOrderByRelevanceFieldEnum)[keyof typeof WishlistOrderByRelevanceFieldEnum]
+
+
+export const ColorSchemeOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description'
+} as const
+
+export type ColorSchemeOrderByRelevanceFieldEnum = (typeof ColorSchemeOrderByRelevanceFieldEnum)[keyof typeof ColorSchemeOrderByRelevanceFieldEnum]
 
 
 
@@ -1205,7 +1374,9 @@ export type GlobalOmitConfig = {
   category?: Prisma.CategoryOmit
   product?: Prisma.ProductOmit
   cart?: Prisma.CartOmit
+  address?: Prisma.AddressOmit
   wishlist?: Prisma.WishlistOmit
+  colorScheme?: Prisma.ColorSchemeOmit
 }
 
 /* Types for Logging */

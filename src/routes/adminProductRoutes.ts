@@ -20,7 +20,6 @@ import {
   updateProductValidation,
   productIdParamValidation,
 } from "../validators/productValidators";
-import { asyncHandler } from "../lib/asyncHandler";
 
 const router = Router();
 
@@ -32,26 +31,22 @@ router.post(
   "/",
   productImageUpload,
   validate(createProductValidation),
-  asyncHandler(createProduct)
+  createProduct
 );
 
 router.put(
   "/:productId",
   productImageUpload,
   validate(updateProductValidation),
-  asyncHandler(updateProduct)
+  updateProduct
 );
 
-router.delete(
-  "/:productId",
-  validate(productIdParamValidation),
-  asyncHandler(deleteProduct)
-);
+router.delete("/:productId", validate(productIdParamValidation), deleteProduct);
 
 router.delete(
   "/:productId/hard",
   validate(productIdParamValidation),
-  asyncHandler(hardDeleteProduct)
+  hardDeleteProduct
 );
 
 export default router;

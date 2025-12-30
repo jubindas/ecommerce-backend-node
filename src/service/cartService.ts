@@ -16,7 +16,6 @@ export class CartService {
   async addToCart(input: AddToCartInput) {
     const { userId, productId, quantity = 1 } = input;
 
-    // Null Check
     const product = await prisma.product.findUnique({
       where: { id: productId },
     });
@@ -25,7 +24,6 @@ export class CartService {
       throw new Error("Product not found");
     }
 
-    // Existence Check
     const existingCart = await prisma.cart.findUnique({
       where: { userId_productId: { userId, productId } },
     });
@@ -103,7 +101,7 @@ export class CartService {
     });
 
     const total = cartItems.reduce((sum, item) => {
-      return sum + item.product.sellingPrice * item.quantity;
+      return sum + (item.product.sellingPrice || 0) * item.quantity;
     }, 0);
 
     return {

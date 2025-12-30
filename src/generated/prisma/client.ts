@@ -63,7 +63,17 @@ export type Product = Prisma.ProductModel
  */
 export type Cart = Prisma.CartModel
 /**
+ * Model Address
+ * 
+ */
+export type Address = Prisma.AddressModel
+/**
  * Model Wishlist
  * 
  */
 export type Wishlist = Prisma.WishlistModel
+/**
+ * Model ColorScheme
+ * 
+ */
+export type ColorScheme = Prisma.ColorSchemeModel

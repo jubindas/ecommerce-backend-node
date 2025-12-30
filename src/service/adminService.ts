@@ -265,7 +265,6 @@ export const deleteUser = async (userId: string) => {
 
 export const getUserBankDetails = async (userId: string) => {
   try {
-    // First verify user exists
     const user = await prisma.user.findUnique({
       where: { id: userId },
       select: { id: true },

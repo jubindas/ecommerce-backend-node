@@ -11,9 +11,9 @@ interface CreateProductInput {
   youtubeLink?: string;
   size?: string;
   expiryDate?: Date;
-  buyingPrice: number;
-  maximumRetailPrice: number;
-  sellingPrice: number;
+  buyingPrice?: number;
+  maximumRetailPrice?: number;
+  sellingPrice?: number;
   quantity: number;
   paymentType: string;
   dimensions?: Record<string, any>;
@@ -155,7 +155,7 @@ export const productService = {
             { masterCategoryId: categoryId },
             { lastCategoryId: categoryId },
           ],
-          isActive: true,
+          // isActive: true,
         },
         skip,
         take: limit,
@@ -201,7 +201,6 @@ export const productService = {
     });
   },
 
-  // Deactivate product (soft delete)
   async deleteProduct(productId: string): Promise<Product> {
     return prisma.product.update({
       where: { id: productId },
@@ -209,7 +208,6 @@ export const productService = {
     });
   },
 
-  // Hard delete product (admin only)
   async hardDeleteProduct(productId: string): Promise<Product> {
     return prisma.product.delete({
       where: { id: productId },

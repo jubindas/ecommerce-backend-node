@@ -56,7 +56,9 @@ export const ModelName = {
   Category: 'Category',
   Product: 'Product',
   Cart: 'Cart',
-  Wishlist: 'Wishlist'
+  Address: 'Address',
+  Wishlist: 'Wishlist',
+  ColorScheme: 'ColorScheme'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -162,6 +164,14 @@ export const CartScalarFieldEnum = {
 export type CartScalarFieldEnum = (typeof CartScalarFieldEnum)[keyof typeof CartScalarFieldEnum]
 
 
+export const AddressScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId'
+} as const
+
+export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeof AddressScalarFieldEnum]
+
+
 export const WishlistScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -170,6 +180,16 @@ export const WishlistScalarFieldEnum = {
 } as const
 
 export type WishlistScalarFieldEnum = (typeof WishlistScalarFieldEnum)[keyof typeof WishlistScalarFieldEnum]
+
+
+export const ColorSchemeScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt'
+} as const
+
+export type ColorSchemeScalarFieldEnum = (typeof ColorSchemeScalarFieldEnum)[keyof typeof ColorSchemeScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -273,6 +293,14 @@ export const CartOrderByRelevanceFieldEnum = {
 export type CartOrderByRelevanceFieldEnum = (typeof CartOrderByRelevanceFieldEnum)[keyof typeof CartOrderByRelevanceFieldEnum]
 
 
+export const AddressOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId'
+} as const
+
+export type AddressOrderByRelevanceFieldEnum = (typeof AddressOrderByRelevanceFieldEnum)[keyof typeof AddressOrderByRelevanceFieldEnum]
+
+
 export const WishlistOrderByRelevanceFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -280,4 +308,13 @@ export const WishlistOrderByRelevanceFieldEnum = {
 } as const
 
 export type WishlistOrderByRelevanceFieldEnum = (typeof WishlistOrderByRelevanceFieldEnum)[keyof typeof WishlistOrderByRelevanceFieldEnum]
+
+
+export const ColorSchemeOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description'
+} as const
+
+export type ColorSchemeOrderByRelevanceFieldEnum = (typeof ColorSchemeOrderByRelevanceFieldEnum)[keyof typeof ColorSchemeOrderByRelevanceFieldEnum]
 

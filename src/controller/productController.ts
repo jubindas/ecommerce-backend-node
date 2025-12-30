@@ -1,53 +1,56 @@
 import { Request, Response } from "express";
+
 import { validationResult } from "express-validator";
+
 import { productService } from "../service/productService";
 
-// Admin Controllers
+import { asyncHandler } from "../lib/asyncHandler";
 
-export const createProduct = async (req: Request, res: Response) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ success: false, errors: errors.array() });
-  }
+export const createProduct = asyncHandler(
+  async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(400).json({ success: false, errors: errors.array() });
+      return;
+    }
 
-  const {
-    productName,
-    shortDesc,
-    longDesc,
-    youtubeLink,
-    size,
-    expiryDate,
-    buyingPrice,
-    maximumRetailPrice,
-    sellingPrice,
-    quantity,
-    paymentType,
-    dimensions,
-    metaData,
-    masterCategoryId,
-    lastCategoryId,
-    isFeatured,
-    isBestSelling,
-    isNewCollection,
-    isRelatedItem,
-  } = req.body;
+    const {
+      productName,
+      shortDesc,
+      longDesc,
+      youtubeLink,
+      size,
+      expiryDate,
+      buyingPrice,
+      maximumRetailPrice,
+      sellingPrice,
+      quantity,
+      paymentType,
+      dimensions,
+      metaData,
+      masterCategoryId,
+      lastCategoryId,
+      isFeatured,
+      isBestSelling,
+      isNewCollection,
+      isRelatedItem,
+    } = req.body;
 
-  // Get uploaded images (mainImage + additional product images)
-  const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+    const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
-  if (!files || !files.mainImage || files.mainImage.length === 0) {
-    return res.status(400).json({
-      success: false,
-      message: "Main image is required",
-    });
-  }
+    if (!files || !files.mainImage || files.mainImage.length === 0) {
+      res.status(400).json({
+        success: false,
+        message: "Main image is required",
+      });
+      return;
+    }
 
-  const mainImage = `/uploads/products/${files.mainImage[0].filename}`;
-  const productImages = (files.productImages || []).map(
-    (file) => `/uploads/products/${file.filename}`
-  );
+    const mainImage = `/uploads/products/${files.mainImage[0].filename}`;
+    const productImages = (files.productImages || []).map(
+      (file) => `/uploads/products/${file.filename}`
+    );
 
-  try {
     const product = await productService.createProduct({
       productName,
       shortDesc,
@@ -57,9 +60,11 @@ export const createProduct = async (req: Request, res: Response) => {
       youtubeLink,
       size,
       expiryDate: expiryDate ? new Date(expiryDate) : undefined,
-      buyingPrice: parseFloat(buyingPrice),
-      maximumRetailPrice: parseFloat(maximumRetailPrice),
-      sellingPrice: parseFloat(sellingPrice),
+      buyingPrice: buyingPrice ? parseFloat(buyingPrice) : undefined,
+      maximumRetailPrice: maximumRetailPrice
+        ? parseFloat(maximumRetailPrice)
+        : undefined,
+      sellingPrice: sellingPrice ? parseFloat(sellingPrice) : undefined,
       quantity: parseInt(quantity),
       paymentType,
       dimensions: dimensions
@@ -80,133 +85,126 @@ export const createProduct = async (req: Request, res: Response) => {
       isRelatedItem: isRelatedItem === "true" || isRelatedItem === true,
     });
 
-    return res.status(201).json({
+    res.status(201).json({
       success: true,
       message: "Product created successfully",
       data: product,
     });
-  } catch (error: any) {
-    return res.status(500).json({
-      success: false,
-      message: error.message || "Failed to create product",
-    });
   }
-};
+);
 
-export const updateProduct = async (req: Request, res: Response) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ success: false, errors: errors.array() });
-  }
-
-  const { productId } = req.params;
-  const updateData = req.body;
-
-  // Add new images if uploaded
-  if (req.files) {
-    const files = req.files as { [fieldname: string]: Express.Multer.File[] };
-
-    if (files.mainImage && files.mainImage.length > 0) {
-      updateData.mainImage = `/uploads/products/${files.mainImage[0].filename}`;
+export const updateProduct = asyncHandler(
+  async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(400).json({ success: false, errors: errors.array() });
+      return;
     }
 
-    if (files.productImages && files.productImages.length > 0) {
-      const newImages = files.productImages.map(
-        (file) => `/uploads/products/${file.filename}`
-      );
-      if (Array.isArray(updateData.productImages)) {
-        updateData.productImages = [...updateData.productImages, ...newImages];
-      } else {
-        updateData.productImages = newImages;
+    const { productId } = req.params;
+
+    const updateData = req.body;
+
+    if (req.files) {
+      const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+
+      if (files.mainImage && files.mainImage.length > 0) {
+        updateData.mainImage = `/uploads/products/${files.mainImage[0].filename}`;
+      }
+
+      if (files.productImages && files.productImages.length > 0) {
+        const newImages = files.productImages.map(
+          (file) => `/uploads/products/${file.filename}`
+        );
+        if (Array.isArray(updateData.productImages)) {
+          updateData.productImages = [
+            ...updateData.productImages,
+            ...newImages,
+          ];
+        } else {
+          updateData.productImages = newImages;
+        }
       }
     }
-  }
 
-  // Parse JSON fields if they're strings
-  if (typeof updateData.dimensions === "string") {
-    updateData.dimensions = JSON.parse(updateData.dimensions);
-  }
-  if (typeof updateData.metaData === "string") {
-    updateData.metaData = JSON.parse(updateData.metaData);
-  }
+    if (typeof updateData.dimensions === "string") {
+      updateData.dimensions = JSON.parse(updateData.dimensions);
+    }
+    if (typeof updateData.metaData === "string") {
+      updateData.metaData = JSON.parse(updateData.metaData);
+    }
 
-  try {
+    if (updateData.buyingPrice) {
+      updateData.buyingPrice = parseFloat(updateData.buyingPrice);
+    }
+    if (updateData.maximumRetailPrice) {
+      updateData.maximumRetailPrice = parseFloat(updateData.maximumRetailPrice);
+    }
+    if (updateData.sellingPrice) {
+      updateData.sellingPrice = parseFloat(updateData.sellingPrice);
+    }
+
     const product = await productService.updateProduct(productId, updateData);
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: "Product updated successfully",
       data: product,
     });
-  } catch (error: any) {
-    return res.status(500).json({
-      success: false,
-      message: error.message || "Failed to update product",
-    });
   }
-};
+);
 
-export const deleteProduct = async (req: Request, res: Response) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ success: false, errors: errors.array() });
-  }
+export const deleteProduct = asyncHandler(
+  async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(400).json({ success: false, errors: errors.array() });
+      return;
+    }
 
-  const { productId } = req.params;
+    const { productId } = req.params;
 
-  try {
     const product = await productService.deleteProduct(productId);
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: "Product deleted successfully",
       data: product,
     });
-  } catch (error: any) {
-    return res.status(500).json({
-      success: false,
-      message: error.message || "Failed to delete product",
-    });
   }
-};
+);
 
-export const hardDeleteProduct = async (req: Request, res: Response) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ success: false, errors: errors.array() });
-  }
+export const hardDeleteProduct = asyncHandler(
+  async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(400).json({ success: false, errors: errors.array() });
+      return;
+    }
 
-  const { productId } = req.params;
+    const { productId } = req.params;
 
-  try {
     const product = await productService.hardDeleteProduct(productId);
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: "Product permanently deleted",
       data: product,
     });
-  } catch (error: any) {
-    return res.status(500).json({
-      success: false,
-      message: error.message || "Failed to delete product",
-    });
   }
-};
+);
 
-// User/Public Controllers
+export const getAllProducts = asyncHandler(
+  async (req: Request, res: Response) => {
+    const {
+      page = 1,
+      limit = 10,
+      categoryId,
+      isFeatured,
+      isBestSelling,
+      isNewCollection,
+    } = req.query;
 
-export const getAllProducts = async (req: Request, res: Response) => {
-  const {
-    page = 1,
-    limit = 10,
-    categoryId,
-    isFeatured,
-    isBestSelling,
-    isNewCollection,
-  } = req.query;
-
-  try {
     const filters: any = { isActive: true };
     if (categoryId) filters.categoryId = categoryId as string;
     if (isFeatured === "true") filters.isFeatured = true;
@@ -219,167 +217,136 @@ export const getAllProducts = async (req: Request, res: Response) => {
       filters
     );
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: "Products retrieved successfully",
       data: result,
     });
-  } catch (error: any) {
-    return res.status(500).json({
-      success: false,
-      message: error.message || "Failed to retrieve products",
-    });
   }
-};
+);
 
-export const getProductById = async (req: Request, res: Response) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ success: false, errors: errors.array() });
-  }
+export const getProductById = asyncHandler(
+  async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(400).json({ success: false, errors: errors.array() });
+      return;
+    }
 
-  const { productId } = req.params;
+    const { productId } = req.params;
 
-  try {
     const product = await productService.getProductById(productId);
 
     if (!product || !product.isActive) {
-      return res.status(404).json({
+      res.status(404).json({
         success: false,
         message: "Product not found",
       });
+      return;
     }
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: "Product retrieved successfully",
       data: product,
     });
-  } catch (error: any) {
-    return res.status(500).json({
-      success: false,
-      message: error.message || "Failed to retrieve product",
-    });
   }
-};
+);
 
-export const getFeaturedProducts = async (req: Request, res: Response) => {
-  const { limit = 10 } = req.query;
+export const getFeaturedProducts = asyncHandler(
+  async (req: Request, res: Response) => {
+    const { limit = 10 } = req.query;
 
-  try {
     const products = await productService.getFeaturedProducts(
       parseInt(limit as string)
     );
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: "Featured products retrieved successfully",
       data: products,
     });
-  } catch (error: any) {
-    return res.status(500).json({
-      success: false,
-      message: error.message || "Failed to retrieve featured products",
-    });
   }
-};
+);
 
-export const getBestSellingProducts = async (req: Request, res: Response) => {
-  const { limit = 10 } = req.query;
+export const getBestSellingProducts = asyncHandler(
+  async (req: Request, res: Response) => {
+    const { limit = 10 } = req.query;
 
-  try {
     const products = await productService.getBestSellingProducts(
       parseInt(limit as string)
     );
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: "Best selling products retrieved successfully",
       data: products,
     });
-  } catch (error: any) {
-    return res.status(500).json({
-      success: false,
-      message: error.message || "Failed to retrieve best selling products",
-    });
   }
-};
+);
 
-export const getNewCollectionProducts = async (req: Request, res: Response) => {
-  const { limit = 10 } = req.query;
+export const getNewCollectionProducts = asyncHandler(
+  async (req: Request, res: Response) => {
+    const { limit = 10 } = req.query;
 
-  try {
     const products = await productService.getNewCollectionProducts(
       parseInt(limit as string)
     );
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: "New collection products retrieved successfully",
       data: products,
     });
-  } catch (error: any) {
-    return res.status(500).json({
-      success: false,
-      message: error.message || "Failed to retrieve new collection products",
-    });
   }
-};
+);
 
-export const getProductsByCategory = async (req: Request, res: Response) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ success: false, errors: errors.array() });
-  }
+export const getProductsByCategory = asyncHandler(
+  async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(400).json({ success: false, errors: errors.array() });
+      return;
+    }
 
-  const { categoryId } = req.params;
-  const { page = 1, limit = 10 } = req.query;
+    const { categoryId } = req.params;
+    const { page = 1, limit = 10 } = req.query;
 
-  try {
     const result = await productService.getProductsByCategory(
       categoryId,
       parseInt(page as string),
       parseInt(limit as string)
     );
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: "Category products retrieved successfully",
       data: result,
     });
-  } catch (error: any) {
-    return res.status(500).json({
-      success: false,
-      message: error.message || "Failed to retrieve category products",
-    });
   }
-};
+);
 
-export const searchProducts = async (req: Request, res: Response) => {
-  const { query, limit = 10 } = req.query;
+export const searchProducts = asyncHandler(
+  async (req: Request, res: Response) => {
+    const { query, limit = 10 } = req.query;
 
-  if (!query) {
-    return res.status(400).json({
-      success: false,
-      message: "Search query is required",
-    });
-  }
+    if (!query) {
+      res.status(400).json({
+        success: false,
+        message: "Search query is required",
+      });
+      return;
+    }
 
-  try {
     const products = await productService.searchProducts(
       query as string,
       parseInt(limit as string)
     );
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: "Products found",
       data: products,
     });
-  } catch (error: any) {
-    return res.status(500).json({
-      success: false,
-      message: error.message || "Failed to search products",
-    });
   }
-};
+);

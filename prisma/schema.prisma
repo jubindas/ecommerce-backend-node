@@ -73,9 +73,9 @@ model Product {
   youtubeLink        String?
   size               String?
   expiryDate         DateTime?
-  buyingPrice        Float
-  maximumRetailPrice Float
-  sellingPrice       Float
+  buyingPrice        Float?
+  maximumRetailPrice Float?
+  sellingPrice       Float?
   quantity           Int
   paymentType        String
   dimensions         Json?
@@ -140,4 +140,11 @@ model Wishlist {
   @@unique([userId, productId])
   @@index([userId])
   @@index([productId])
+}
+
+model ColorScheme {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
 }
