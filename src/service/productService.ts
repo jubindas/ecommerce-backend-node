@@ -47,6 +47,95 @@ export const productService = {
     });
   },
 
+  async createProductWithVariants(input: {
+    product: CreateProductInput;
+    variants: Array<{
+      sku?: string;
+      variantName?: string;
+      color?: string;
+      size?: string;
+      dimensions?: Record<string, any>;
+      attributes?: Record<string, any>;
+      variantImages?: string[];
+      variantDescription?: string;
+      buyingPrice?: number;
+      maximumRetailPrice?: number;
+      sellingPrice?: number;
+      quantity: number;
+      lowStockAlert?: number;
+      expiryDate?: Date;
+      hasCashOnDelivery?: boolean;
+      sizeChartId?: string;
+      isRelatedItem?: boolean;
+      isDefault?: boolean;
+    }>;
+  }): Promise<Product> {
+     
+    const { productVariantService } = await import("./productVariantService");
+
+    return prisma.$transaction(async (tx) => {
+      
+      const product = await tx.product.create({
+        data: {
+          ...input.product,
+          hasVariants: true,
+          quantity: 0,  
+          productImages: input.product.productImages
+            ? JSON.stringify(input.product.productImages)
+            : null,
+        },
+      });
+
+  
+      const createdVariants = [];
+
+      for (const variantInput of input.variants) {
+        
+        const sku = variantInput.sku || await productVariantService.generateSKU(
+          product.id,
+          variantInput.color,
+          variantInput.size
+        );
+
+      
+        const existingSKU = await tx.productVariant.findUnique({
+          where: { sku }
+        });
+
+        if (existingSKU) {
+          throw new Error(`SKU ${sku} already exists`);
+        }
+
+      
+        const variantData: any = {
+          productId: product.id,
+          ...variantInput,
+          sku,
+          variantImages: variantInput.variantImages 
+            ? JSON.stringify(variantInput.variantImages) 
+            : null,
+        };
+
+        const variant = await tx.productVariant.create({
+          data: variantData,
+        });
+
+        createdVariants.push(variant);
+      }
+
+    
+      return tx.product.findUnique({
+        where: { id: product.id },
+        include: {
+          variants: true,
+          masterCategory: true,
+          lastCategory: true,
+          sizeChart: true,
+        },
+      }) as Promise<Product>;
+    });
+  },
+
   async getAllProducts(
     page: number = 1,
     limit: number = 10,
@@ -167,7 +256,7 @@ export const productService = {
             { masterCategoryId: categoryId },
             { lastCategoryId: categoryId },
           ],
-          // isActive: true,
+          isActive: true,
         },
         skip,
         take: limit,

@@ -75,3 +75,14 @@ export const blogImageUpload = multer({
   { name: "thumbImage", maxCount: 1 },
   { name: "contentImages", maxCount: 10 },
 ]);
+
+export const variantImageUpload = multer({
+  storage: productStorage,
+  fileFilter,
+  limits: {
+    fileSize: 5 * 1024 * 1024,
+  },
+}).fields([
+  { name: "variantImages", maxCount: 5 },
+]);
+

@@ -48,6 +48,10 @@ import userOrderRoutes from "./routes/userOrderRoutes";
 
 import adminOrderRoutes from "./routes/adminOrderRoutes";
 
+import adminProductVariantRoutes from "./routes/adminProductVariantRoutes";
+
+import userProductVariantRoutes from "./routes/userProductVariantRoutes";
+
 const app = express();
 
 app.use(
@@ -58,7 +62,7 @@ app.use(
   })
 );
 
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
 
 const logger = (
   req: express.Request,
@@ -69,6 +73,8 @@ const logger = (
   const method = req.method;
   const time = new Date().toISOString();
   console.log(`[${time}] ${method} ${url}`);
+  console.log(`Content-Type: ${req.headers['content-type']}`);
+  console.log(`Body keys: ${Object.keys(req.body || {}).length > 0 ? Object.keys(req.body).join(', ') : 'EMPTY'}`);
   next();
 };
 
@@ -91,7 +97,7 @@ app.use(
   })
 );
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
@@ -113,7 +119,11 @@ app.use("/api/v1/admin/blogs", adminBlogRoutes);
 
 app.use("/api/v1/admin/products", adminProductRoutes);
 
+app.use("/api/v1/admin/products", adminProductVariantRoutes);
+
 app.use("/api/v1/products", userProductRoutes);
+
+app.use("/api/v1/products", userProductVariantRoutes);
 
 app.use("/api/v1/cart", userCartRoutes);
 

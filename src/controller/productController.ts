@@ -7,8 +7,83 @@ import { CustomError } from "../middleware/errorHandler";
 
 export const createProduct = async (req: Request, res: Response) => {
   try {
-    const product = await productService.createProduct(req.body);
+    const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+    
+    
+    const mainImagePath = files?.mainImage?.[0]?.path;
+
+    const productImagesPaths = files?.productImages?.map(file => file.path) || [];
+
+    
+    const productData: any = {
+      productName: req.body.productName,
+      shortDesc: req.body.shortDesc,
+      longDesc: req.body.longDesc,
+      mainImage: mainImagePath || req.body.mainImage,  
+      productImages: productImagesPaths.length > 0 ? productImagesPaths : 
+                     (req.body.productImages ? JSON.parse(req.body.productImages) : []),
+      youtubeLink: req.body.youtubeLink,
+      size: req.body.size,
+      expiryDate: req.body.expiryDate ? new Date(req.body.expiryDate) : undefined,
+      buyingPrice: req.body.buyingPrice ? parseFloat(req.body.buyingPrice) : undefined,
+      maximumRetailPrice: req.body.maximumRetailPrice ? parseFloat(req.body.maximumRetailPrice) : undefined,
+      sellingPrice: req.body.sellingPrice ? parseFloat(req.body.sellingPrice) : undefined,
+      quantity: req.body.quantity ? parseInt(req.body.quantity) : 0,
+      paymentType: req.body.paymentType,
+      dimensions: req.body.dimensions ? JSON.parse(req.body.dimensions) : undefined,
+      metaData: req.body.metaData ? JSON.parse(req.body.metaData) : undefined,
+      masterCategoryId: req.body.masterCategoryId,
+      lastCategoryId: req.body.lastCategoryId,
+      sizeChartId: req.body.sizeChartId,
+      isFeatured: req.body.isFeatured === 'true',
+      isBestSelling: req.body.isBestSelling === 'true',
+      isNewCollection: req.body.isNewCollection === 'true',
+      isRelatedItem: req.body.isRelatedItem === 'true',
+      hasVariants: req.body.hasVariants === 'true',
+    };
+
+    
+    if (!productData.productName) {
+      throw new CustomError("Product name is required", 400);
+    }
+
+    if (!productData.mainImage) {
+      throw new CustomError("Main image is required (upload file or provide URL)", 400);
+    }
+
+    if (!productData.masterCategoryId) {
+      throw new CustomError("Master category ID is required", 400);
+    }
+
+    const product = await productService.createProduct(productData);
     res.status(201).json({ success: true, data: product });
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const createProductWithVariants = async (req: Request, res: Response) => {
+  try {
+    const { product, variants } = req.body;
+
+    if (!product) {
+      throw new CustomError("Product data is required", 400);
+    }
+
+    if (!variants || !Array.isArray(variants) || variants.length === 0) {
+      throw new CustomError("At least one variant is required", 400);
+    }
+
+    const createdProduct = await productService.createProductWithVariants({
+      product,
+      variants
+    });
+
+    res.status(201).json({ 
+      success: true, 
+      data: createdProduct,
+      message: `Product created with ${variants.length} variant(s)`
+    });
   } catch (error) {
     throw error;
   }

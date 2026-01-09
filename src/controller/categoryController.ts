@@ -6,6 +6,8 @@ import * as categoryService from "../service/categoryService";
 
 import { CustomError } from "../middleware/errorHandler";
 
+// 7d86fb7e-f2b4-4a9b-8095-1f29c5165d49 -> Cat Id
+
 export const createCategory = async (
   req: AuthRequest,
   res: Response
@@ -15,7 +17,8 @@ export const createCategory = async (
       throw new CustomError("User not authenticated", 401);
     }
 
-    const { name, isActive, isFeatured, description, slug, parentId } = req.body;
+    const { name, isActive, isFeatured, description, slug, parentId } =
+      req.body;
 
     if (!name || name.trim() === "") {
       throw new CustomError("Category name is required", 400);
@@ -165,7 +168,8 @@ export const updateCategory = async (
     }
 
     const { categoryId } = req.params;
-    const { name, isActive, isFeatured, description, slug, parentId } = req.body;
+    const { name, isActive, isFeatured, description, slug, parentId } =
+      req.body;
 
     if (!categoryId) {
       throw new CustomError("Category ID is required", 400);

@@ -134,7 +134,7 @@ model ProductVariant {
   sku         String  @unique
   variantName String?
 
-  // Variant attributes
+ 
   color String?
   size  String?
 
@@ -144,7 +144,7 @@ model ProductVariant {
   variantImages      String? @db.LongText
   variantDescription String?
 
-  // Pricing & Inventory
+   
   buyingPrice        Float?
   maximumRetailPrice Float?
   sellingPrice       Float?
@@ -166,7 +166,7 @@ model ProductVariant {
   cartItems     Cart[]
   wishlistItems Wishlist[]
   orderItems    OrderItem[]
-  couponProducts CouponProduct[] // Added relation for variant-specific coupons
+  couponProducts CouponProduct[]  
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
