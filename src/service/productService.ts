@@ -78,7 +78,7 @@ export const productService = {
         data: {
           ...input.product,
           hasVariants: true,
-          quantity: 0,
+          quantity: input.product.quantity || 0,
           isActive: true,
           productImages: input.product.productImages
             ? JSON.stringify(input.product.productImages)

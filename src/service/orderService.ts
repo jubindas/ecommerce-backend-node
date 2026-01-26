@@ -34,13 +34,13 @@ export const createOrder = async (data: CreateOrderData) => {
 
   let totalAmount = 0;
 
-  const orderItemsData: { 
-      productId: string; 
-      variantId?: string; 
-      quantity: number; 
-      price: number; 
-      size: string | undefined; 
-      color: string | undefined; 
+  const orderItemsData: {
+    productId: string;
+    variantId?: string;
+    quantity: number;
+    price: number;
+    size: string | undefined;
+    color: string | undefined;
   }[] = [];
 
   // 1. Validation and Stock Check Phase
@@ -52,41 +52,39 @@ export const createOrder = async (data: CreateOrderData) => {
     if (!product) {
       throw new CustomError(`Product not found: ${item.productId}`, 404);
     }
-    
+
     let price = 0;
     let availableQuantity = 0;
 
     if (item.variantId) {
-        const variant = await prisma.productVariant.findUnique({
-            where: { id: item.variantId }
-        });
-        if (!variant) throw new CustomError(`Variant not found: ${item.variantId}`, 404);
-        if (variant.productId !== item.productId) throw new CustomError("Variant mismatch", 400);
-        
-        price = variant.sellingPrice || variant.maximumRetailPrice || 0;
-        availableQuantity = variant.quantity;
-        
-        if (availableQuantity < item.quantity) {
-             throw new CustomError(`Insufficient stock for variant: ${variant.sku}`, 400);
-        }
+      const variant = await prisma.productVariant.findUnique({
+        where: { id: item.variantId }
+      });
+      if (!variant) throw new CustomError(`Variant not found: ${item.variantId}`, 404);
+      if (variant.productId !== item.productId) throw new CustomError("Variant mismatch", 400);
+
+      price = variant.sellingPrice || variant.maximumRetailPrice || 0;
+      availableQuantity = variant.quantity;
+
+      if (availableQuantity < item.quantity) {
+        throw new CustomError(`Insufficient stock for variant: ${variant.sku}`, 400);
+      }
     } else {
-        // Simple product
-        if (product.hasVariants) {
-            throw new CustomError(`Product ${product.productName} requires variant selection`, 400);
-        }
-        price = product.sellingPrice || product.maximumRetailPrice || 0;
-        availableQuantity = product.quantity;
-        
-        if (availableQuantity < item.quantity) {
-             throw new CustomError(`Insufficient stock for product: ${product.productName}`, 400);
-        }
+
+
+      price = product.sellingPrice || product.maximumRetailPrice || 0;
+      availableQuantity = product.quantity;
+
+      if (availableQuantity < item.quantity) {
+        throw new CustomError(`Insufficient stock for product: ${product.productName}`, 400);
+      }
     }
 
     totalAmount += price * item.quantity;
 
     orderItemsData.push({
       productId: item.productId,
-      variantId: item.variantId || undefined, // undefined for prisma optional
+      variantId: item.variantId || undefined,
       quantity: item.quantity,
       price: price,
       size: item.size,
@@ -94,31 +92,29 @@ export const createOrder = async (data: CreateOrderData) => {
     });
   }
 
-  // 2. Coupon Application Logic
+
   let discountAmount = 0;
   if (couponId) {
     const coupon = await prisma.coupon.findUnique({ where: { id: couponId } });
     if (coupon && coupon.isActive) {
-        
-        // Logic to validate coupon AGAIN? Usually validated at cart, but good to check expiry/minOrder here.
-        // Skipping deep item validation for brevity, assuming cart validation passed and applying simplified rules.
-        
-        if (coupon.type === "FIXED") {
-            discountAmount = coupon.value;
-        } else if (coupon.type === "PERCENTAGE") {
-            discountAmount = (totalAmount * coupon.value) / 100;
-        }
-        if (coupon.maxDiscount && discountAmount > coupon.maxDiscount) {
-            discountAmount = coupon.maxDiscount;
-        }
+
+
+
+      if (coupon.type === "FIXED") {
+        discountAmount = coupon.value;
+      } else if (coupon.type === "PERCENTAGE") {
+        discountAmount = (totalAmount * coupon.value) / 100;
+      }
+      if (coupon.maxDiscount && discountAmount > coupon.maxDiscount) {
+        discountAmount = coupon.maxDiscount;
+      }
     }
   }
 
   const finalAmount = Math.max(0, totalAmount - discountAmount);
-  
+
   const orderNumber = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
 
-  // 3. transaction: Create Order + Decrement Stock
   const order = await prisma.$transaction(async (tx) => {
 
     const newOrder = await tx.order.create({
@@ -150,19 +146,19 @@ export const createOrder = async (data: CreateOrderData) => {
       },
     });
 
-    // Decrement stock
+
     for (const item of items) {
-       if (item.variantId) {
-           await tx.productVariant.update({
-               where: { id: item.variantId },
-               data: { quantity: { decrement: item.quantity } }
-           });
-       } else {
-           await tx.product.update({
-               where: { id: item.productId },
-               data: { quantity: { decrement: item.quantity } }
-           });
-       }
+      if (item.variantId) {
+        await tx.productVariant.update({
+          where: { id: item.variantId },
+          data: { quantity: { decrement: item.quantity } }
+        });
+      } else {
+        await tx.product.update({
+          where: { id: item.productId },
+          data: { quantity: { decrement: item.quantity } }
+        });
+      }
     }
 
     return newOrder;
@@ -209,99 +205,99 @@ export const updateOrderStatus = async (
 };
 
 export const getOrderById = async (orderId: string) => {
-    const order = await prisma.order.findUnique({
-        where: { id: orderId },
+  const order = await prisma.order.findUnique({
+    where: { id: orderId },
+    include: {
+      orderItems: {
         include: {
-            orderItems: {
-                include: {
-                    product: true,
-                    variant: true // Include variant details
-                }
-            },
-            history: {
-                orderBy: { createdAt: 'desc' }
-            },
-            address: true,
-            user: {
-                select: {
-                    id: true,
-                    fullName: true,
-                    email: true
-                }
-            }
+          product: true,
+          variant: true // Include variant details
         }
-    });
-
-    if (!order) {
-      throw new CustomError("Order not found", 404);
+      },
+      history: {
+        orderBy: { createdAt: 'desc' }
+      },
+      address: true,
+      user: {
+        select: {
+          id: true,
+          fullName: true,
+          email: true
+        }
+      }
     }
+  });
 
-    return order;
+  if (!order) {
+    throw new CustomError("Order not found", 404);
+  }
+
+  return order;
 }
 
 export const getUserOrders = async (userId: string, page = 1, limit = 10) => {
-    const skip = (page - 1) * limit;
+  const skip = (page - 1) * limit;
 
-    const orders = await prisma.order.findMany({
-        where: { userId },
-        skip,
-        take: limit,
-        orderBy: { createdAt: 'desc' },
-        include: {
-            orderItems: {
-                take: 1, 
-                include: { product: true, variant: true }
-            },
-            _count: {
-                select: { orderItems: true }
-            }
-        }
-    });
+  const orders = await prisma.order.findMany({
+    where: { userId },
+    skip,
+    take: limit,
+    orderBy: { createdAt: 'desc' },
+    include: {
+      orderItems: {
+        take: 1,
+        include: { product: true, variant: true }
+      },
+      _count: {
+        select: { orderItems: true }
+      }
+    }
+  });
 
-    const total = await prisma.order.count({ where: { userId } });
+  const total = await prisma.order.count({ where: { userId } });
 
-    return {
-        orders,
-        pagination: {
-            total,
-            page,
-            limit,
-            totalPages: Math.ceil(total / limit)
-        }
-    };
+  return {
+    orders,
+    pagination: {
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit)
+    }
+  };
 }
 
 export const getAllOrders = async (page = 1, limit = 10, status?: OrderStatus) => {
-    const skip = (page - 1) * limit;
-    const where = status ? { status } : {};
+  const skip = (page - 1) * limit;
+  const where = status ? { status } : {};
 
-    const orders = await prisma.order.findMany({
-        where,
-        skip,
-        take: limit,
-        orderBy: { createdAt: 'desc' },
-        include: {
-            user: {
-                select: {
-                    fullName: true,
-                    email: true
-                }
-            },
-            _count: {
-                select: { orderItems: true }
-            }
+  const orders = await prisma.order.findMany({
+    where,
+    skip,
+    take: limit,
+    orderBy: { createdAt: 'desc' },
+    include: {
+      user: {
+        select: {
+          fullName: true,
+          email: true
         }
-    });
+      },
+      _count: {
+        select: { orderItems: true }
+      }
+    }
+  });
 
-    const total = await prisma.order.count({ where });
+  const total = await prisma.order.count({ where });
 
-    return {
-        orders,
-        pagination: {
-            total,
-            page,
-            limit,
-            totalPages: Math.ceil(total / limit)
-        }
-    };
+  return {
+    orders,
+    pagination: {
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit)
+    }
+  };
 }
